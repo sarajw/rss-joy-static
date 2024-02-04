@@ -1,0 +1,59 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  --lh: 1.4rem;
+  line-height: var(--lh);
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline: 0.75rem;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  font-size: 2.5rem;
+  margin-block: 0;
+}
+header h1 span::after {
+  content: " ";
+}
+header p {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+
+article {
+  background-color: hsla(var(--hue), 25%, 50%, 0.1);
+  padding: 0 1.25rem 0.25rem;
+  border-radius: 1rem;
+  max-width: min(100%, 25rem);
+}
+article ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+article li {
+  margin-block-end: 0.5rem;
+  text-wrap: balance;
+}
+article a {
+  color:  color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
+}
+article a:visited {
+  color:  color-mix( in srgb, hsl(var(--hue), 25%, 50%), CanvasText);
+}
+
+footer {
+  text-align: center;
+}

@@ -1,5 +1,6 @@
 ---
 import { XMLParser } from 'fast-xml-parser';
+import '../styles/rss-joy.css';
 const parser = new XMLParser();
 
 const feedURLs = [
@@ -17,7 +18,7 @@ const feedURLs = [
 	"https://www.mayank.co/blog/rss.xml",
 ];
 
-async function rss2data(url, max = 5) {
+async function rss2data(url: RequestInfo | URL, max = 5) {
 	const rssResponse = await fetch(url);
 	const rssText = await rssResponse.text();
 	const feed = parser.parse(rssText);
@@ -48,9 +49,7 @@ for (const feedURL of feedURLs) {
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>RSS JOY</title>
 	</head>
 	<body>
@@ -62,9 +61,11 @@ for (const feedURL of feedURLs) {
 			{rssCards.map((rssCard) => (
 				<article style=`--hue: ${Math.round(Math.random() * 360)}`>
 					<h2><a href={rssCard.link}>{rssCard.title}</a></h2>
-					{rssCard.entries.map((entry) => (
-						<p><a href={entry.link}>{entry.title}</a></p>
+					<ul>
+					{rssCard.entries.map((entry: { link: string | URL; title: string; }) => (
+						<li><a href={entry.link}>{entry.title}</a></li>
 					))}
+					</ul>
 				</article>
 			))}
 		</main>
@@ -73,60 +74,3 @@ for (const feedURL of feedURLs) {
 		</footer>
 	</body>
 </html>
-
-<style>
-:root {
-  color-scheme: light dark;
-  font-family: system-ui, sans-serif;
-  --lh: 1.4rem;
-  line-height: var(--lh);
-}
-
-header {
-  display: flex;
-  flex-wrap: wrap;
-  padding-inline: 0.75rem;
-  gap: 1rem;
-  justify-content: space-between;
-  align-items: center;
-}
-header h1 {
-  font-size: 2.5rem;
-  margin-block: 0;
-}
-header h1 span::after {
-  content: " ";
-}
-header p {
-  font-size: 1.5rem;
-  font-weight: 300;
-}
-
-main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0.5rem;
-  gap: 1rem;
-}
-
-article {
-  background-color: hsla(var(--hue), 25%, 50%, 0.1);
-  padding: 0.25rem 1rem 0.75rem;
-  border-radius: 1rem;
-  max-width: min(100%, 25rem);
-}
-article p {
-  text-wrap: balance;
-}
-article a {
-  color:  color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
-}
-article a:visited {
-  color:  color-mix( in srgb, hsl(var(--hue), 25%, 50%), CanvasText);
-}
-
-footer {
-  text-align: center;
-}
-</style>
