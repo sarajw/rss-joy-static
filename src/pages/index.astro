@@ -1,0 +1,132 @@
+---
+import { XMLParser } from 'fast-xml-parser';
+const parser = new XMLParser();
+
+const feedURLs = [
+	"https://sarajoy.dev/rss.xml",
+	"https://localghost.dev/feed.xml",
+	"https://www.htmhell.dev/feed.xml",
+	"https://chriskirknielsen.com/rss.xml",
+	"https://rknight.me/subscribe/posts/rss.xml",
+	"https://mxb.dev/feed.xml",
+	"https://matthiasott.com/feed",
+	"https://buttondown.email/ownyourweb/rss",
+	"https://noahliebman.net/feed/index.xml",
+	"https://chriscoyier.net/feed/",
+	"https://daverupert.com/atom.xml",
+	"https://www.mayank.co/blog/rss.xml",
+];
+
+async function rss2data(url, max = 5) {
+	const rssResponse = await fetch(url);
+	const rssText = await rssResponse.text();
+	const feed = parser.parse(rssText);
+	const title = feed.rss ? feed.rss.channel.title : feed.feed.title;
+	const link = feed.rss ? feed.rss.channel.link : feed.feed.id;
+	const posts = feed.rss ? feed.rss.channel.item : feed.feed.entry;
+	let entries = [];
+	for (let entry = 0; entry < max; entry++) {
+		entries.push({
+			"title": posts[entry].title,
+			"link": posts[0].id ?? posts[0].guid,
+		});
+	}
+	return {
+		"title": title,
+		"link": link,
+		"entries": entries,
+	}
+}
+
+let rssCards = [];
+for (const feedURL of feedURLs) {
+	rssCards.push(await rss2data(feedURL));
+}
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>RSS JOY</title>
+	</head>
+	<body>
+		<header>
+			<h1>RS.<span>S</span>JOY.lol</h1>
+			<p>An RSS-some starting page.</p>
+		</header>
+		<main>
+			{rssCards.map((rssCard) => (
+				<article style=`--hue: ${Math.round(Math.random() * 360)}`>
+					<h2><a href={rssCard.link}>{rssCard.title}</a></h2>
+					{rssCard.entries.map((entry) => (
+						<p><a href={entry.link}>{entry.title}</a></p>
+					))}
+				</article>
+			))}
+		</main>
+		<footer>
+			<p>2024 <a href="https://sarajoy.dev">Sara Joy</a></p>
+		</footer>
+	</body>
+</html>
+
+<style>
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  --lh: 1.4rem;
+  line-height: var(--lh);
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline: 0.75rem;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  font-size: 2.5rem;
+  margin-block: 0;
+}
+header h1 span::after {
+  content: " ";
+}
+header p {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+
+article {
+  background-color: hsla(var(--hue), 25%, 50%, 0.1);
+  padding: 0.25rem 1rem 0.75rem;
+  border-radius: 1rem;
+  max-width: min(100%, 25rem);
+}
+article p {
+  text-wrap: balance;
+}
+article a {
+  color:  color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
+}
+article a:visited {
+  color:  color-mix( in srgb, hsl(var(--hue), 25%, 50%), CanvasText);
+}
+
+footer {
+  text-align: center;
+}
+</style>
