@@ -16,15 +16,31 @@ async function rss2data(url: RequestInfo | URL, max = 5) {
 	const rssResponse = await fetch(url);
 	const rssText = await rssResponse.text();
 	const feed = parser.parse(rssText);
-	const title = feed.rss ? feed.rss.channel.title : feed.feed.title;
-	const link = feed.rss ? feed.rss.channel.link : feed.feed.id;
-	const posts = feed.rss ? feed.rss.channel.item : feed.feed.entry;
+	const isNotAtom = feed.rss ? true : false;
+	const title = isNotAtom ? feed.rss.channel.title : feed.feed.title;
+	const link = isNotAtom ? feed.rss.channel.link : feed.feed.id;
+	const posts = isNotAtom ? feed.rss.channel.item : feed.feed.entry;
+	let newestFirst = true;
+	if (new Date(posts[0].pubDate ?? posts[0].updated).getTime() < new Date(posts[1].pubDate || posts[1].updated).getTime()) {
+		newestFirst = false;
+	}
 	let entries = [];
-	for (let entry = 0; entry < max; entry++) {
-		entries.push({
-			"title": posts[entry].title,
-			"link": posts[entry].id ?? posts[entry].guid,
-		});
+	if (newestFirst) {
+		for (let entry = 0; entry < max; entry++) {
+			entries.push({
+				"title": posts[entry].title,
+				"link": posts[entry].id ?? posts[entry].guid,
+				"date": new Date(posts[entry].pubDate ?? posts[entry].updated).toDateString(),
+			});
+		}
+	} else {
+		for (let entry = posts.length - 1; entry >= (posts.length - max); entry--) {
+			entries.push({
+				"title": posts[entry].title,
+				"link": posts[entry].id ?? posts[entry].guid,
+				"date": new Date(posts[entry].pubDate ?? posts[entry].updated).toDateString(),
+			});
+		}
 	}
 	return {
 		"title": title,
@@ -58,8 +74,10 @@ for (const feedURL of feedURLs) {
 				<article style=`--hue: ${Math.round(Math.random() * 360)}`>
 					<h2><a href={rssCard.link}>{rssCard.title}</a></h2>
 					<ul>
-					{rssCard.entries.map((entry: { link: string | URL; title: string; }) => (
-						<li><a href={entry.link}>{entry.title}</a></li>
+					{rssCard.entries.map((entry: { link: string | URL; title: string; date: string }) => (
+						<li>
+							<a href={entry.link}>{entry.title}</a><small> &middot; {entry.date}</small>
+						</li>
 					))}
 					</ul>
 				</article>

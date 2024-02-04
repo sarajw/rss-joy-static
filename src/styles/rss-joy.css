@@ -46,6 +46,9 @@ article ul {
 article li + li {
   margin-block-start: 0.5rem;
 }
+article li small {
+  opacity: 0.5;
+}
 article h2 a{
   font-size: 1.5rem;
 }
