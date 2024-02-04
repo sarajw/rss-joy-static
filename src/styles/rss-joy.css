@@ -1,7 +1,7 @@
 :root {
   color-scheme: light dark;
   font-family: system-ui, sans-serif;
-  --lh: 1.4rem;
+  --lh: 1.5rem;
   line-height: var(--lh);
 }
 
@@ -36,19 +36,30 @@ article {
   border-radius: 1rem;
   max-width: min(100%, 25rem);
 }
+article * {
+  text-wrap: balance;
+}
 article ul {
   list-style-type: none;
   padding-inline-start: 0px;
 }
-article li {
-  margin-block-end: 0.5rem;
-  text-wrap: balance;
+article li + li {
+  margin-block-start: 0.5rem;
+}
+article h2 a{
+  font-size: 1.5rem;
 }
 article a {
+  font-size: 1.2rem;
   color:  color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 0.05em;
 }
 article a:visited {
   color:  color-mix( in srgb, hsl(var(--hue), 25%, 50%), CanvasText);
+}
+article a:hover {
+  text-decoration-style: wavy;
 }
 
 footer .info {
