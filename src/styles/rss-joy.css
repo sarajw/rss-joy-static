@@ -17,9 +17,6 @@ header h1 {
   font-size: 2.5rem;
   margin-block: 0;
 }
-header h1 span::after {
-  content: " ";
-}
 header p {
   font-size: 1.5rem;
   font-weight: 300;
