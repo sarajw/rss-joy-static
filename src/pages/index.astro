@@ -1,9 +1,16 @@
 ---
-import { feedURLs } from '../data/feeds.js';
+import { feedURLs } from '../../public/feeds.js';
 import '../styles/rss-joy.css';
 
 import { XMLParser } from 'fast-xml-parser';
 const parser = new XMLParser();
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 async function rss2data(url: RequestInfo | URL, max = 5) {
 	const rssResponse = await fetch(url);
@@ -27,6 +34,7 @@ async function rss2data(url: RequestInfo | URL, max = 5) {
 }
 
 let rssCards = [];
+shuffle(feedURLs);
 for (const feedURL of feedURLs) {
 	rssCards.push(await rss2data(feedURL));
 }
@@ -58,7 +66,13 @@ for (const feedURL of feedURLs) {
 			))}
 		</main>
 		<footer>
-			<p>2024 <a href="https://sarajoy.dev">Sara Joy</a></p>
+			<div class="info">
+				<p>This little RSS aggregator is made in <a href="https://astro.build/">Astro</a>. It outputs a fast, static page.</p>
+				<p>It randomises the list of supplied <a href="/feeds.js">feed URLs</a> each time it rebuilds, as well as updating the entries. It uses <a href="https://www.npmjs.com/package/fast-xml-parser">fast-xml-parser</a>.</p>
+				<p>Rebuilds are triggered every 6 hours via a Netlify build hook and GitHub Actions.</p>
+				<p>Feel free to fork from <a href="https://github.com/sarajw/rss-joy-static">the GitHub repo</a>. Or you can look at the <a href="https://github.com/sarajw/rss-joy">client-side version</a>. Enjoy!</p>
+			</div>
+			<p id="credit">2024 <a href="https://sarajoy.dev">Sara Joy</a></p>
 		</footer>
 	</body>
 </html>

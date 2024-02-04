@@ -51,6 +51,10 @@ article a:visited {
   color:  color-mix( in srgb, hsl(var(--hue), 25%, 50%), CanvasText);
 }
 
-footer {
+footer .info {
+  max-width: 60ch;
+  margin-inline: auto;
+}
+footer #credit {
   text-align: center;
 }
