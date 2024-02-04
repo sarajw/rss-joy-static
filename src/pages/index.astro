@@ -29,7 +29,7 @@ async function rss2data(url: RequestInfo | URL, max = 5) {
 	for (let entry = 0; entry < max; entry++) {
 		entries.push({
 			"title": posts[entry].title,
-			"link": posts[0].id ?? posts[0].guid,
+			"link": posts[entry].id ?? posts[entry].guid,
 		});
 	}
 	return {
