@@ -12,4 +12,8 @@ export const feedURLs = [
 	"https://daverupert.com/atom.xml",
 	"https://www.mayank.co/blog/rss.xml",
 	"https://www.matuzo.at/feed_all.xml",
+	"https://ericwbailey.website/feed/feed.xml",
+	"https://nerdy.dev/rss.xml",
+	"https://saneef.com/feed.xml",
+	"https://dutchcelt.nl/feed.xml",
 ];
