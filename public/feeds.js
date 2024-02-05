@@ -17,4 +17,5 @@ export const feedURLs = [
 	"https://saneef.com/feed.xml",
 	"https://dutchcelt.nl/feed.xml",
 	"https://kilianvalkhof.com/feed/",
+	"https://sidebar.io/feed.xml",
 ];
