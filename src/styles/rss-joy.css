@@ -36,7 +36,7 @@ article {
   max-width: min(100%, 25rem);
 }
 article * {
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 article ul {
   list-style-type: none;
