@@ -16,4 +16,5 @@ export const feedURLs = [
 	"https://nerdy.dev/rss.xml",
 	"https://saneef.com/feed.xml",
 	"https://dutchcelt.nl/feed.xml",
+	"https://kilianvalkhof.com/feed/",
 ];
