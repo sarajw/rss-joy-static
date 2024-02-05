@@ -18,4 +18,5 @@ export const feedURLs = [
 	"https://dutchcelt.nl/feed.xml",
 	"https://kilianvalkhof.com/feed/",
 	"https://sidebar.io/feed.xml",
+	"https://robinrendle.com/cascadefeed.xml",
 ];
