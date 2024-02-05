@@ -21,15 +21,16 @@ async function rss2data(url: RequestInfo | URL, max = 5) {
 	const link = isNotAtom ? feed.rss.channel.link : feed.feed.id;
 	const posts = isNotAtom ? feed.rss.channel.item : feed.feed.entry;
 	let newestFirst = true;
-	if (new Date(posts[0].pubDate ?? posts[0].updated).getTime() < new Date(posts[1].pubDate || posts[1].updated).getTime()) {
+	if (new Date(isNotAtom ? posts[0].pubDate : posts[0].published ?? posts[0].updated).getTime() < new Date(isNotAtom ? posts[1].pubDate : posts[1].published ?? posts[1].updated).getTime()) {
 		newestFirst = false;
 	}
 	let entries = [];
 	if (newestFirst) {
 		for (let entry = 0; entry < max; entry++) {
-			const date = new Date(posts[entry].pubDate ?? posts[entry].updated).getDate();
-			const month = new Date(posts[entry].pubDate ?? posts[entry].updated).getMonth();
-			const year = new Date(posts[entry].pubDate ?? posts[entry].updated).getFullYear();
+			const entryDate = new Date(isNotAtom ? posts[entry].pubDate : posts[entry].published ?? posts[entry].updated);
+			const date = entryDate.getDate();
+			const month = entryDate.getMonth();
+			const year = entryDate.getFullYear();
 			entries.push({
 				"title": posts[entry].title,
 				"link": posts[entry].id ?? posts[entry].guid,
@@ -38,9 +39,10 @@ async function rss2data(url: RequestInfo | URL, max = 5) {
 		}
 	} else {
 		for (let entry = posts.length - 1; entry >= (posts.length - max); entry--) {
-			const date = new Date(posts[entry].pubDate ?? posts[entry].updated).getDate();
-			const month = new Date(posts[entry].pubDate ?? posts[entry].updated).getMonth();
-			const year = new Date(posts[entry].pubDate ?? posts[entry].updated).getFullYear();
+			const entryDate = new Date(isNotAtom ? posts[entry].pubDate : posts[entry].published ?? posts[entry].updated);
+			const date = entryDate.getDate();
+			const month = entryDate.getMonth();
+			const year = entryDate.getFullYear();
 			entries.push({
 				"title": posts[entry].title,
 				"link": posts[entry].id ?? posts[entry].guid,
