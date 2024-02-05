@@ -27,18 +27,24 @@ async function rss2data(url: RequestInfo | URL, max = 5) {
 	let entries = [];
 	if (newestFirst) {
 		for (let entry = 0; entry < max; entry++) {
+			const date = new Date(posts[entry].pubDate ?? posts[entry].updated).getDate();
+			const month = new Date(posts[entry].pubDate ?? posts[entry].updated).getMonth();
+			const year = new Date(posts[entry].pubDate ?? posts[entry].updated).getFullYear();
 			entries.push({
 				"title": posts[entry].title,
 				"link": posts[entry].id ?? posts[entry].guid,
-				"date": new Date(posts[entry].pubDate ?? posts[entry].updated).toDateString(),
+				"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
 			});
 		}
 	} else {
 		for (let entry = posts.length - 1; entry >= (posts.length - max); entry--) {
+			const date = new Date(posts[entry].pubDate ?? posts[entry].updated).getDate();
+			const month = new Date(posts[entry].pubDate ?? posts[entry].updated).getMonth();
+			const year = new Date(posts[entry].pubDate ?? posts[entry].updated).getFullYear();
 			entries.push({
 				"title": posts[entry].title,
 				"link": posts[entry].id ?? posts[entry].guid,
-				"date": new Date(posts[entry].pubDate ?? posts[entry].updated).toDateString(),
+				"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
 			});
 		}
 	}
@@ -76,7 +82,7 @@ for (const feedURL of feedURLs) {
 					<ul>
 					{rssCard.entries.map((entry: { link: string | URL; title: string; date: string }) => (
 						<li>
-							<a href={entry.link}>{entry.title}</a><small> &middot; {entry.date}</small>
+							<a href={entry.link}>{entry.title}</a><small>{entry.date}</small>
 						</li>
 					))}
 					</ul>
@@ -84,12 +90,14 @@ for (const feedURL of feedURLs) {
 			))}
 		</main>
 		<footer>
-			<div class="info">
-				<p>This little RSS aggregator is made in <a href="https://astro.build/">Astro</a>. It outputs a fast, static page.</p>
+			<p class="dates-toggle"><label><input type="checkbox"> Show dates</label></p>
+			<details class="info">
+				<summary>About this site</summary>
+				<p>This little RSS aggregator is built with <a href="https://astro.build/">Astro</a>. It outputs a fast, static page.</p>
 				<p>It randomises the list of supplied <a href="/feeds.js">feed URLs</a> each time it rebuilds, as well as updating the entries. It uses <a href="https://www.npmjs.com/package/fast-xml-parser">fast-xml-parser</a>.</p>
 				<p>Rebuilds are triggered every 4 hours between 8am and 8pm UTC, via a Netlify build hook and GitHub Actions.</p>
 				<p>Feel free to fork from <a href="https://github.com/sarajw/rss-joy-static">the GitHub repo</a>. Or you can look at the <a href="https://github.com/sarajw/rss-joy">client-side version</a>. Enjoy!</p>
-			</div>
+			</details>
 			<p id="credit">2024 <a href="https://sarajoy.dev">Sara Joy</a></p>
 		</footer>
 	</body>
