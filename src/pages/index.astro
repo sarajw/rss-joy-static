@@ -33,7 +33,7 @@ async function rss2data(url: string, max = 5) {
 			const year = entryDate.getFullYear();
 			entries.push({
 				"title": posts[entry].title,
-				"link": posts[entry].id ?? posts[entry].guid,
+				"link": isNotAtom ? posts[entry].link ?? posts[entry].guid : posts[entry].id,
 				"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
 			});
 		}
@@ -45,7 +45,7 @@ async function rss2data(url: string, max = 5) {
 			const year = entryDate.getFullYear();
 			entries.push({
 				"title": posts[entry].title,
-				"link": posts[entry].id ?? posts[entry].guid,
+				"link": isNotAtom ? posts[entry].link ?? posts[entry].guid : posts[entry].id,
 				"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
 			});
 		}
