@@ -12,7 +12,7 @@ function shuffle(array) {
   }
 }
 
-async function rss2data(url: RequestInfo | URL, max = 5) {
+async function rss2data(url: string, max = 5) {
 	const rssResponse = await fetch(url);
 	const rssText = await rssResponse.text();
 	const feed = parser.parse(rssText);
@@ -60,7 +60,7 @@ async function rss2data(url: RequestInfo | URL, max = 5) {
 let rssCards = [];
 shuffle(feedURLs);
 for (const feedURL of feedURLs) {
-	rssCards.push(await rss2data(feedURL));
+	rssCards.push(await rss2data(feedURL.url, feedURL.posts ?? undefined));
 }
 
 ---
