@@ -28,4 +28,6 @@ export const feedURLs = [
 	{ "url": "https://ohhelloana.blog/feed.xml" },
 	{ "url": "https://shkspr.mobi/blog/feed/atom/", "posts": 3 },
 	{ "url": "https://thomasrigby.com/feed.xml" },
+	{ "url": "https://briefs.video/feed.xml" },
+	
 ];

@@ -1,8 +1,6 @@
 :root {
   color-scheme: light dark;
   font-family: system-ui, sans-serif;
-  --lh: 1.5rem;
-  line-height: var(--lh);
 }
 
 header {
@@ -34,6 +32,7 @@ article {
   padding: 0 1.25rem 0.25rem;
   border-radius: 1rem;
   max-width: min(100%, 25rem);
+  position: relative;
 }
 article * {
   text-wrap: pretty;
@@ -54,8 +53,8 @@ article li {
 :root:has(.dates-toggle input:not(:checked)) article li small {
   display: none;
 }
-article li small {
-  opacity: 0.5;
+article li small { 
+  color: hsl(var(--hue), 25%, 50%);
 }
 @media screen and (max-width: 400px) { 
   article li {
@@ -67,20 +66,32 @@ article li small {
     margin-inline: auto 0;
   }
 }
-article h2 a{
+article h2 a {
   font-size: 1.5rem;
 }
 article a {
   font-size: 1.2rem;
-  color:  color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
+  color: color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
   text-underline-offset: 0.15em;
   text-decoration-thickness: 0.05em;
 }
 article a:visited {
-  color:  color-mix( in srgb, hsl(var(--hue), 25%, 50%), CanvasText);
+  color: color-mix( in srgb, hsl(var(--hue), 25%, 50%), CanvasText);
 }
 article a:hover {
   text-decoration-style: wavy;
+}
+article a.rss {
+  font-size: 1rem;
+  position: absolute;
+  height: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
+  opacity: 0.5;
+}
+article .rss:is(:hover, :focus) {
+  opacity: 1;
 }
 
 footer .info {
