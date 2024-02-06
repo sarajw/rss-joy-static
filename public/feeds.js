@@ -19,4 +19,5 @@ export const feedURLs = [
 	"https://kilianvalkhof.com/feed/",
 	"https://sidebar.io/feed.xml",
 	"https://robinrendle.com/cascadefeed.xml",
+	"https://gkeenan.co/avgb?format=rss",
 ];
