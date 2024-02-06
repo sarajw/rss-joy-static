@@ -20,4 +20,12 @@ export const feedURLs = [
 	{ "url": "https://sidebar.io/feed.xml" },
 	{ "url": "https://robinrendle.com/cascadefeed.xml" },
 	{ "url": "https://gkeenan.co/avgb?format=rss", "posts": 3 },
+	{ "url": "https://lea.codes/rss.xml" },
+	{ "url": "https://helloyes.dev/feeds/blog/feed.xml" },
+	{ "url": "https://www.sarasoueidan.com/blog/index.xml" },
+	{ "url": "https://joanwestenberg.com/blog?format=rss" },
+	{ "url": "https://www.stefanjudis.com/rss.xml" },
+	{ "url": "https://ohhelloana.blog/feed.xml" },
+	{ "url": "https://shkspr.mobi/blog/feed/atom/" },
+	{ "url": "https://thomasrigby.com/feed.xml" },
 ];
