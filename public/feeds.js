@@ -22,10 +22,10 @@ export const feedURLs = [
 	{ "url": "https://gkeenan.co/avgb?format=rss", "posts": 3 },
 	{ "url": "https://lea.codes/rss.xml" },
 	{ "url": "https://helloyes.dev/feeds/blog/feed.xml" },
-	{ "url": "https://www.sarasoueidan.com/blog/index.xml" },
+	{ "url": "https://www.sarasoueidan.com/blog/index.xml", "posts": 4 },
 	{ "url": "https://joanwestenberg.com/blog?format=rss" },
 	{ "url": "https://www.stefanjudis.com/rss.xml" },
 	{ "url": "https://ohhelloana.blog/feed.xml" },
-	{ "url": "https://shkspr.mobi/blog/feed/atom/" },
+	{ "url": "https://shkspr.mobi/blog/feed/atom/", "posts": 3 },
 	{ "url": "https://thomasrigby.com/feed.xml" },
 ];
