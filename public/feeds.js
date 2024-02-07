@@ -34,4 +34,5 @@ export const feedURLs = [
 	{ "url": "https://knowler.dev/feed.xml" },
 	{ "url": "https://feeds.feedburner.com/brad-frosts-blog" },
 	{ "url": "https://www.keithcirkel.co.uk/feed.xml" },
+	{ "url": "https://manuel-strehl.de/feed.xml" },
 ];
