@@ -29,5 +29,9 @@ export const feedURLs = [
 	{ "url": "https://shkspr.mobi/blog/feed/atom/", "posts": 3 },
 	{ "url": "https://thomasrigby.com/feed.xml" },
 	{ "url": "https://briefs.video/feed.xml" },
-
+	{ "url": "https://heydonworks.com/feed.xml" },
+	{ "url": "https://joshcollinsworth.com/api/rss.xml" },
+	{ "url": "https://knowler.dev/feed.xml" },
+	{ "url": "https://feeds.feedburner.com/brad-frosts-blog" },
+	{ "url": "https://www.keithcirkel.co.uk/feed.xml" },
 ];
