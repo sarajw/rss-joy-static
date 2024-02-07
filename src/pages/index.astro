@@ -40,7 +40,6 @@ async function rss2data(url: string, max = 5) {
 		const date = entryDate.getDate();
 		const month = entryDate.getMonth();
 		const year = entryDate.getFullYear();
-		console.log(posts[entry].link)
 		entries.push({
 			"title": posts[entry].title['#text'],
 			"link":  posts[entry].link['#text'] ?? posts[entry].link.attr_href ?? posts[entry].link[0].attr_href,
