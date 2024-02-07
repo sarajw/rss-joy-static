@@ -9,14 +9,14 @@ const parser = new XMLParser({
 	alwaysCreateTextNode: true,
 });
 
-function shuffle(array) {
+function shuffle(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
 
-async function rss2data(url: string, max = 5) {
+async function rss2data(url: string, max = 5, order = "newFirst") {
 	const rssResponse = await fetch(url);
 	const rssText = await rssResponse.text();
 	const feed = parser.parse(rssText);
@@ -30,9 +30,13 @@ async function rss2data(url: string, max = 5) {
 				: feed.feed.link[1].attr_href
 			: feed.feed.link['#text'];
 	const posts = isNotAtom ? feed.rss.channel.item : feed.feed.entry;
-	let newestFirst = true;
-	if (new Date((isNotAtom ? posts[0].pubDate: posts[0]?.published ?? posts[0].updated)['#text']).getTime() < new Date((isNotAtom ? posts[1].pubDate : posts[1].published ?? posts[1].updated)['#text']).getTime()) {
-		newestFirst = false;
+	let newestFirst = order == "newFirst";
+	if (order == "random") {
+		posts.sort(function(a: any, b: any){
+			// @ts-ignore
+			return new Date((isNotAtom ? b.pubDate : b.published ?? b.updated)['#text']) - new Date((isNotAtom ? a.pubDate : a.published ?? a.updated)['#text']);
+		});
+		newestFirst = true;
 	}
 	let entries = [];
 	for (let entry = newestFirst ? 0 : posts.length - 1; newestFirst ? entry < max : entry >= (posts.length - max); newestFirst ? entry++ : entry--) {
@@ -57,7 +61,7 @@ async function rss2data(url: string, max = 5) {
 let rssCards = [];
 shuffle(feedURLs);
 for (const feedURL of feedURLs) {
-	rssCards.push(await rss2data(feedURL.url, feedURL.posts ?? undefined));
+	rssCards.push(await rss2data(feedURL.url, feedURL.posts ?? undefined, feedURL.order ?? undefined));
 }
 
 ---
