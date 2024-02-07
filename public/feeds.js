@@ -17,8 +17,8 @@ export const feedURLs = [
 	{ "url": "https://saneef.com/feed.xml" },
 	{ "url": "https://dutchcelt.nl/feed.xml" },
 	{ "url": "https://kilianvalkhof.com/feed/" },
-	{ "url": "https://sidebar.io/feed.xml" },
 	{ "url": "https://robinrendle.com/cascadefeed.xml" },
+	{ "url": "https://robinrendle.com/feed.xml" },
 	{ "url": "https://gkeenan.co/avgb?format=rss", "posts": 3 },
 	{ "url": "https://lea.codes/rss.xml" },
 	{ "url": "https://helloyes.dev/feeds/blog/feed.xml" },
@@ -35,4 +35,6 @@ export const feedURLs = [
 	{ "url": "https://feeds.feedburner.com/brad-frosts-blog", "posts": 4 },
 	{ "url": "https://www.keithcirkel.co.uk/feed.xml" },
 	{ "url": "https://manuel-strehl.de/feed.xml" },
+	{ "url": "https://erinkissane.com/feed.rss" },
+	{ "url": "https://brucelawson.co.uk/feed/" },
 ];
