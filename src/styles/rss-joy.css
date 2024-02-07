@@ -33,6 +33,9 @@ article {
   border-radius: 1rem;
   max-width: min(100%, 25rem);
   position: relative;
+  box-shadow:
+    0.1rem 0.2rem 0.5rem -0.25rem hsla(var(--hue), 50%, 75%, 0.4) inset,
+    -0.1rem -0.2rem 0.5rem -0.25rem  hsla(var(--hue), 50%, 10%, 0.4) inset;
 }
 article * {
   text-wrap: pretty;
@@ -56,7 +59,7 @@ article li {
 article li small { 
   color: hsl(var(--hue), 25%, 50%);
 }
-@media screen and (max-width: 400px) { 
+@media (max-width: 400px) { 
   article li {
     flex-direction: column;
     align-items: start;
@@ -86,7 +89,7 @@ article a.rss {
   position: absolute;
   height: 1rem;
   top: 0.5rem;
-  right: 0.5rem;
+  right: 0.6rem;
   color: color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
   opacity: 0.5;
 }
