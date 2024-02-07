@@ -82,7 +82,7 @@ for (const feedURL of feedURLs) {
 					<ul>
 					{rssCard.entries.map((entry: { link: string | URL; title: string; date: string }) => (
 						<li>
-							<a href={entry.link}>{entry.title}</a><small>{entry.date}</small>
+							<a href={entry.link} set:html={entry.title}></a><small>{entry.date}</small>
 						</li>
 					))}
 					</ul>
