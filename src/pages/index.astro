@@ -3,7 +3,11 @@ import { feedURLs } from '../../public/feeds.js';
 import '../styles/rss-joy.css';
 
 import { XMLParser } from 'fast-xml-parser';
-const parser = new XMLParser();
+const parser = new XMLParser({
+	ignoreAttributes : false,
+	attributeNamePrefix : "attr_",
+	alwaysCreateTextNode: true,
+});
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -17,38 +21,30 @@ async function rss2data(url: string, max = 5) {
 	const rssText = await rssResponse.text();
 	const feed = parser.parse(rssText);
 	const isNotAtom = feed.rss ? true : false;
-	const title = isNotAtom ? feed.rss.channel.title : feed.feed.title;
-	const link = isNotAtom ? feed.rss.channel.link : feed.feed.id;
+	const title = (isNotAtom ? feed.rss.channel.title : feed.feed.title)['#text'];
+	const link = isNotAtom 
+		? feed.rss.channel.link.attr_href ?? feed.rss.channel.link['#text']
+		: feed.feed.link.length > 1
+			? feed.feed.link[0].attr_rel == "alternate"
+				? feed.feed.link[0].attr_href
+				: feed.feed.link[1].attr_href
+			: feed.feed.link['#text'];
 	const posts = isNotAtom ? feed.rss.channel.item : feed.feed.entry;
 	let newestFirst = true;
-	if (new Date(isNotAtom ? posts[0].pubDate : posts[0].published ?? posts[0].updated).getTime() < new Date(isNotAtom ? posts[1].pubDate : posts[1].published ?? posts[1].updated).getTime()) {
+	if (new Date((isNotAtom ? posts[0].pubDate: posts[0]?.published ?? posts[0].updated)['#text']).getTime() < new Date((isNotAtom ? posts[1].pubDate : posts[1].published ?? posts[1].updated)['#text']).getTime()) {
 		newestFirst = false;
 	}
 	let entries = [];
-	if (newestFirst) {
-		for (let entry = 0; entry < max; entry++) {
-			const entryDate = new Date(isNotAtom ? posts[entry].pubDate : posts[entry].published ?? posts[entry].updated);
-			const date = entryDate.getDate();
-			const month = entryDate.getMonth();
-			const year = entryDate.getFullYear();
-			entries.push({
-				"title": posts[entry].title,
-				"link": isNotAtom ? posts[entry].link ?? posts[entry].guid : posts[entry].id,
-				"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
-			});
-		}
-	} else {
-		for (let entry = posts.length - 1; entry >= (posts.length - max); entry--) {
-			const entryDate = new Date(isNotAtom ? posts[entry].pubDate : posts[entry].published ?? posts[entry].updated);
-			const date = entryDate.getDate();
-			const month = entryDate.getMonth();
-			const year = entryDate.getFullYear();
-			entries.push({
-				"title": posts[entry].title,
-				"link": isNotAtom ? posts[entry].link ?? posts[entry].guid : posts[entry].id,
-				"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
-			});
-		}
+	for (let entry = newestFirst ? 0 : posts.length - 1; newestFirst ? entry < max : entry >= (posts.length - max); newestFirst ? entry++ : entry--) {
+		const entryDate = new Date((isNotAtom ? posts[entry].pubDate : posts[entry].published ?? posts[entry].updated)['#text']);
+		const date = entryDate.getDate();
+		const month = entryDate.getMonth();
+		const year = entryDate.getFullYear();
+		entries.push({
+			"title": posts[entry].title['#text'],
+			"link": posts[entry].link.attr_href ?? posts[entry].link['#text'],
+			"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
+		});
 	}
 	return {
 		"title": title,
@@ -99,8 +95,8 @@ for (const feedURL of feedURLs) {
 				<summary>About this site</summary>
 				<p>This little RSS aggregator is built with <a href="https://astro.build/">Astro</a>. It outputs a fast, static page.</p>
 				<p>It randomises the list of supplied <a href="/feeds.js">feed URLs</a> each time it rebuilds, as well as updating the entries. It uses <a href="https://www.npmjs.com/package/fast-xml-parser">fast-xml-parser</a>.</p>
-				<p>Rebuilds are triggered every 4 hours between 8am and 8pm UTC, via a Netlify build hook and GitHub Actions.</p>
-				<p>Feel free to fork from <a href="https://github.com/sarajw/rss-joy-static">the GitHub repo</a>. Or you can look at the <a href="https://github.com/sarajw/rss-joy">client-side version</a>. Enjoy!</p>
+				<p>Rebuilds are triggered every 6 hours via a Netlify build hook and GitHub Actions.</p>
+				<p>Feel free to fork from <a href="https://github.com/sarajw/rss-joy-static">the GitHub repo</a>. Enjoy!</p>
 			</details>
 			<p id="credit">2024 <a href="https://sarajoy.dev">Sara Joy</a></p>
 		</footer>

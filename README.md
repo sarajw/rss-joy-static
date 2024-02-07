@@ -8,4 +8,4 @@ See the site in action at https://rs.sjoy.lol :)
 ```sh
 npm create astro@latest -- --template minimal
 ```
-[Astro documentation](https://docs.astro.build).
+[Astro documentation](https://docs.astro.build)
