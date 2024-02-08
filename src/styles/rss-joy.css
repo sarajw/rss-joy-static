@@ -85,11 +85,15 @@ article a:hover {
   text-decoration-style: wavy;
 }
 article a.rss {
-  font-size: 1rem;
   position: absolute;
-  height: 1rem;
-  top: 0.5rem;
-  right: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  top: 0;
+  right: 0;
   color: color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
   opacity: 0.5;
 }
