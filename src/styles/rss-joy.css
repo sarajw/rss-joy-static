@@ -74,12 +74,12 @@ article h2 a {
 }
 article a {
   font-size: 1.2rem;
-  color: color-mix( in srgb, hsl(var(--hue), 100%, 50%), CanvasText);
+  color: color-mix( in srgb, hsl(var(--hue), 100%, 50%) 30%, CanvasText);
   text-underline-offset: 0.15em;
   text-decoration-thickness: 0.05em;
 }
 article a:visited {
-  color: color-mix( in srgb, hsl(var(--hue), 25%, 50%), CanvasText);
+  color: color-mix( in srgb, hsl(var(--hue), 25%, 50%) 30%, CanvasText);
 }
 article a:hover {
   text-decoration-style: wavy;
