@@ -38,6 +38,6 @@ export const feedURLs = [
 	{ "url": "https://erinkissane.com/feed.rss" },
 	{ "url": "https://brucelawson.co.uk/feed/" },
 	{ "url": "https://moderncss.dev/feed/" },
-	{ "url": "https://gomakethings.com/feed/index.xml" }
-	{ "url": "https://adrianroselli.com/feed" }
+	{ "url": "https://gomakethings.com/feed/index.xml" },
+	{ "url": "https://adrianroselli.com/feed" },
 ];
