@@ -41,4 +41,6 @@ export const feedURLs = [
 	{ "url": "https://gomakethings.com/feed/index.xml" },
 	{ "url": "https://adrianroselli.com/feed" },
 	{ "url": "https://www.erikkroes.nl/blog/feed.xml", "order": "reverse" },
+	{ "url": "https://yatil.net/feed" },
+
 ];
