@@ -42,5 +42,5 @@ export const feedURLs = [
 	{ "url": "https://adrianroselli.com/feed" },
 	{ "url": "https://www.erikkroes.nl/blog/feed.xml", "order": "reverse" },
 	{ "url": "https://yatil.net/feed" },
-
+	{ "url": "https://blog.jim-nielsen.com/feed.xml" },
 ];
