@@ -1,5 +1,4 @@
 export const feedURLs = [
-	{ "url": "https://sarajoy.dev/rss.xml" },
 	{ "url": "https://localghost.dev/feed.xml" },
 	{ "url": "https://www.htmhell.dev/feed.xml" },
 	{ "url": "https://chriskirknielsen.com/rss.xml" },
