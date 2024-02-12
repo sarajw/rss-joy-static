@@ -43,4 +43,5 @@ export const feedURLs = [
 	{ "url": "https://www.erikkroes.nl/blog/feed.xml", "order": "reverse" },
 	{ "url": "https://yatil.net/feed" },
 	{ "url": "https://blog.jim-nielsen.com/feed.xml" },
+	{ "url": "https://www.citationneeded.news/rss/" },
 ];
