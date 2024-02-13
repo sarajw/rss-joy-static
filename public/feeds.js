@@ -44,4 +44,5 @@ export const feedURLs = [
 	{ "url": "https://blog.jim-nielsen.com/feed.xml" },
 	{ "url": "https://www.citationneeded.news/rss/" },
 	{ "url": "https://weblog.anniegreens.lol/rss.xml" },
+	{ "url": "https://mikegrindle.com/feed.xml" },
 ];
