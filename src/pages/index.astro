@@ -9,7 +9,7 @@ const parser = new XMLParser({
 	alwaysCreateTextNode: true,
 });
 
-function shuffle(array: any[]) {
+export function shuffle(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
@@ -100,7 +100,8 @@ for (const feedURL of feedURLs) {
 				<summary>About this site</summary>
 				<p>This little RSS aggregator is built with <a href="https://astro.build/">Astro</a>. It outputs a fast, static page.</p>
 				<p>It randomises the list of supplied <a href="/feeds.js">feed URLs</a> each time it rebuilds, as well as updating the entries. It uses <a href="https://www.npmjs.com/package/fast-xml-parser">fast-xml-parser</a>.</p>
-				<p>Rebuilds are triggered every 6 hours via a Netlify build hook and GitHub Actions.</p>
+				<p>Rebuilds are triggered at least every 6 hours via a Netlify build hook and a GitHub Action.</p>
+				<p>A slower-loading client-side RSS-parsing version is available at <a href="/live">/live</a> :)</p>
 				<p>Feel free to fork from <a href="https://github.com/sarajw/rss-joy-static">the GitHub repo</a>. Enjoy!</p>
 			</details>
 			<p id="credit">2024 <a href="https://sarajoy.dev">Sara Joy</a></p>

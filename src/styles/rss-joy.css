@@ -3,6 +3,12 @@
   font-family: system-ui, sans-serif;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 header {
   display: flex;
   flex-wrap: wrap;
@@ -13,6 +19,9 @@ header {
 header h1 {
   font-size: 2.5rem;
   margin-block: 0.75rem 0;
+}
+header h1 em {
+  font-weight: 300;
 }
 header p {
   font-size: 1.5rem;
@@ -27,19 +36,24 @@ main {
   gap: 1rem;
 }
 
+main > :is(article, rss-list) {
+  max-width: min(100%, 25rem);
+}
+rss-list > article {
+  height: 100%;
+}
 article {
   background-color: hsla(var(--hue), 25%, 50%, 0.1);
-  padding: 0 1.25rem 0.25rem;
+  padding: 0.1rem 1.25rem 0.25rem;
   border-radius: 1rem;
-  max-width: min(100%, 25rem);
   position: relative;
   box-shadow:
     0.1rem 0.2rem 0.5rem -0.25rem hsla(var(--hue), 50%, 75%, 0.4) inset,
     -0.1rem -0.2rem 0.5rem -0.25rem  hsla(var(--hue), 50%, 10%, 0.4) inset;
 }
-article * {
+/* article * {
   text-wrap: pretty;
-}
+} */
 article ul {
   list-style-type: none;
   padding-inline-start: 0px;
@@ -69,6 +83,9 @@ article li small {
     display: block;
     margin-inline: auto 0;
   }
+}
+article h2 {
+  margin-block: 0.5em;
 }
 article h2 a {
   font-size: 1.5rem;

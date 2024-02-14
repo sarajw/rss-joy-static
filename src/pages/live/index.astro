@@ -1,0 +1,36 @@
+---
+import { feedURLs } from '../../../public/feeds.js';
+import { shuffle } from '../index.astro'
+import '../../styles/rss-joy.css';
+
+shuffle(feedURLs);
+--- 
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="A page full of links to front-end dev and dev-adjacent bloggers, their RSS feeds and their most recent posts. The page reloads the RSS feeds live when you refresh. The blog cards are randomised each time.">
+		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌈</text></svg>" />
+    <script src="../../scripts/rss2html.js"></script>
+		<title>RSS JOY</title>
+	</head>
+	<body>
+		<header>
+			<h1>RS.S JOY.lol <em>live</em></h1>
+			<p>An RSS-some starting page.</p>
+		</header>
+    <main>
+      {feedURLs.map((blog) => (
+      <rss-list src={blog.url} max={blog.posts ?? "5"}></rss-list>
+      ))}
+    </main>
+    <footer>
+      <p id="credit">2024 <a href="https://sarajoy.dev">Sara Joy</a> with lots of help from <a href="https://hectius.com/">Darius</a> :)
+        <br>
+        <br><a href="/">Back to static version</a></p>
+      
+    </footer>
+  </body>
+  
+  </html>
