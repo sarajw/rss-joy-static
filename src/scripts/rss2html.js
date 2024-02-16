@@ -6,7 +6,7 @@ function strip(html){
 	return doc.body.textContent || "";
 }
 
-async function rss2html(url, max) {
+async function rss2html(url, max, order) {
 	if (location !== "127.0.0.1" && location !== "localhost") {
 		url = `/rewrite/${url.replace(/^https?\:\/\//i, "")}`;
 	}
@@ -15,14 +15,32 @@ async function rss2html(url, max) {
 	const doc = parser.parseFromString(rssText, "application/xml");
 	window.rssDocs ??= {};
 	Object.assign(window.rssDocs, { [url]: doc });
+	const isNotAtom = doc.querySelector("entry") == null;
 	const title = doc.querySelector("channel > title, feed > title").textContent;
 	const link =
-		doc.querySelector("channel > link")?.textContent ||
-		doc.querySelector("feed > link:not([rel])")?.getAttribute("href");
+		doc.querySelector("channel > link:not([rel='self'])")?.textContent ||
+		doc.querySelector("channel > link:not([rel='self'])")?.getAttribute("href") ||
+		doc.querySelector("feed > link:not([rel='self'])")?.getAttribute("href");
 	const maxItems = parseInt(max, 10) || Infinity;
-	const items = Array.from(doc.querySelectorAll("channel > item, feed > entry"))
-		.slice(0, maxItems)
-		.map((item) => ({
+
+	console.log(title);
+	console.log(link);
+	
+	const posts = Array.from(doc.querySelectorAll("channel > item, feed > entry"));
+
+	let newestFirst = order == "newFirst";
+	if (order == "random") {
+		posts.sort(function(a, b){
+			return new Date((isNotAtom ? b.querySelector("pubDate") : b.querySelector("published") ?? b.querySelector("updated")).textContent) - new Date((isNotAtom ? a.querySelector("pubDate") : a.querySelector("published") ?? a.querySelector("updated")).textContent);
+		});
+		newestFirst = true;
+	}
+
+	const entries = newestFirst
+		?	posts.slice(0, maxItems)
+		: posts.slice(-maxItems).toReversed();
+	
+	const items = entries.map((item) => ({
 			title: item.querySelector("title").textContent,
 			link:
 				item.querySelector("link")?.textContent ||
@@ -43,7 +61,7 @@ async function rss2html(url, max) {
 		</article>`;
 }
 class RssList extends HTMLElement {
-	static observedAttributes = ["src", "max"];
+	static observedAttributes = ["src", "max", "order"];
 	pending = false;
 
 	constructor() {
@@ -54,7 +72,7 @@ class RssList extends HTMLElement {
 		if (!this.getAttribute("src") || this.pending) return;
 		this.innerHTML = `<article style="background-color: hsla(0, 0%, 50%, 0.1); display: grid; place-content: center"><p>Loading ${this.getAttribute("src")}</p></article>`;
 		this.pending = true;
-		rss2html(this.getAttribute("src"), this.getAttribute("max")).then(
+		rss2html(this.getAttribute("src"), this.getAttribute("max"), this.getAttribute("order")).then(
 			(html) => {
 				this.innerHTML = html;
 				this.pending = false;
@@ -67,7 +85,7 @@ class RssList extends HTMLElement {
 	}
 
 	attributeChangedCallback(name) {
-		if (["max", "src"].includes(name)) {
+		if (["max", "src", "order"].includes(name)) {
 			this.update();
 		}
 	}
