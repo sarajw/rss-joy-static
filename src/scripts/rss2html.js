@@ -1,10 +1,10 @@
 const parser = new DOMParser();
 const location = window.location.hostname;
 
-function strip(html){
-	let doc = parser.parseFromString(html, 'text/html');
-	return doc.body.textContent || "";
-}
+// function strip(html){
+// 	let doc = parser.parseFromString(html, 'text/html');
+// 	return doc.body.textContent || "";
+// }
 
 async function rss2html(url, max, order) {
 	if (location !== "127.0.0.1" && location !== "localhost") {
@@ -23,8 +23,8 @@ async function rss2html(url, max, order) {
 		doc.querySelector("feed > link:not([rel='self'])")?.getAttribute("href");
 	const maxItems = parseInt(max, 10) || Infinity;
 
-	console.log(title);
-	console.log(link);
+	// console.log(title);
+	// console.log(link);
 	
 	const posts = Array.from(doc.querySelectorAll("channel > item, feed > entry"));
 

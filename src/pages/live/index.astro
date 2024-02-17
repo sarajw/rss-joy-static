@@ -1,9 +1,7 @@
 ---
 import { feedURLs } from '../../../public/feeds.js';
-import { shuffle } from '../index.astro'
 import '../../styles/rss-joy.css';
-
-shuffle(feedURLs);
+import { shuffle } from '../index.astro';
 --- 
 
 <html lang="en">
@@ -21,6 +19,7 @@ shuffle(feedURLs);
 			<p>An RSS-some starting page.</p>
 		</header>
     <main>
+      {shuffle(feedURLs)}
       {feedURLs.map((blog) => (
       <rss-list src={blog.url} max={blog.posts ?? "5"} order={blog.order ?? "newFirst"}></rss-list>
       ))}

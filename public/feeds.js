@@ -53,6 +53,5 @@ export const feedURLs = [
 	{ "url": "https://darthmall.net/feed.xml" },
 	{ "url": "https://benmyers.dev/feed.xml" },
 	{ "url": "https://css-irl.info/rss.xml" },
-	{ "url": "https://www.baldurbjarnason.com/feed.xml" },
- { "url": "https://shoptalkshow.com/feed/" },
+	{ "url": "https://shoptalkshow.com/feed/" },
 ];
