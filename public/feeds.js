@@ -55,4 +55,5 @@ export const feedURLs = [
 	{ "url": "https://css-irl.info/rss.xml" },
 	{ "url": "https://shoptalkshow.com/feed/" },
 	{ "url": "https://sia.codes/feed/feed.xml", "order": "reverse" },
+	{ "url": "https://danielcwilson.com/feed.xml" },
 ];
