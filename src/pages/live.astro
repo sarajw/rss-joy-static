@@ -3,4 +3,8 @@ import { feedURLs } from '../../public/feeds.js';
 import LiveLayout from '../layouts/Live.astro';
 ---
 
-<LiveLayout feedURLs={feedURLs}>
+<LiveLayout
+  feedURLs={feedURLs}
+  edition="dev live"
+  description="A page full of links to front-end dev and dev-adjacent bloggers, their RSS feeds and their most recent posts. The page reloads the RSS feeds live when you refresh. The blog cards are randomised 4 times a day."
+>

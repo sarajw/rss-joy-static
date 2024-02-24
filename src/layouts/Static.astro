@@ -2,7 +2,7 @@
 import { rss2data, shuffle } from '../scripts/rss2data';
 import '../styles/rss-joy.css';
 
-const { feedURLs, edition  } = Astro.props;
+const { feedURLs, title = "RS.S JOY.lol", description, edition = "Aggregator", tagline = "An RSS-some starting page." } = Astro.props;
 
 let rssCards = [];
 shuffle(feedURLs);
@@ -16,14 +16,14 @@ for (const feedURL of feedURLs) {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="A page full of links to front-end dev and dev-adjacent bloggers, their RSS feeds and their most recent posts. The page refreshes at least 4 times a day. The blog cards are randomised each time.">
+		<meta name="description" content={description}>
 		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌈</text></svg>" />
-		<title>RSS JOY</title>
+		<title>{title}{edition && " | " + edition}</title>
 	</head>
 	<body>
 		<header>
-			<h1>RS.S JOY.lol {edition && <em>{edition}</em>}</h1>
-			<p>An RSS-some starting page.</p>
+			<h1>{title}{edition && <em> {edition}</em>}</h1>
+			<p>{tagline}</p>
 		</header>
 		<main>
 			{rssCards.map((rssCard) => (

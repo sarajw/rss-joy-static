@@ -3,4 +3,8 @@ import { feedURLs } from '../../public/feeds.js';
 import Static from '../layouts/Static.astro';
 ---
 
-<Static feedURLs={feedURLs}>
+<Static
+  feedURLs={feedURLs}
+  edition="dev"
+  description="A page full of links to front-end dev and dev-adjacent bloggers, their RSS feeds and their most recent posts. The page refreshes at least 4 times a day. The blog cards are randomised each time."
+>
