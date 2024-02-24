@@ -2,7 +2,7 @@
 import { rss2data, shuffle } from '../scripts/rss2data';
 import '../styles/rss-joy.css';
 
-const { feedURLs, title = "RS.S JOY.lol", description, edition = "Aggregator", tagline = "An RSS-some starting page." } = Astro.props;
+const { feedURLs, title = "RS.S JOY.lol", description, edition = "Aggregator", tagline = "An RSS-some starting page.", about = false } = Astro.props;
 
 let rssCards = [];
 shuffle(feedURLs);
@@ -42,14 +42,14 @@ for (const feedURL of feedURLs) {
 		</main>
 		<footer>
 			<p class="dates-toggle"><label><input type="checkbox"> Show dates</label></p>
-			<details class="info">
+			{about && <details class="info">
 				<summary>About this site</summary>
 				<p>This little RSS aggregator is built with <a href="https://astro.build/">Astro</a>. It outputs a fast, static page.</p>
 				<p>It randomises the list of supplied <a href="/feeds.js">feed URLs</a> each time it rebuilds, as well as updating the entries. It uses <a href="https://www.npmjs.com/package/fast-xml-parser">fast-xml-parser</a>.</p>
 				<p>Rebuilds are triggered at least every 6 hours via a Netlify build hook and a GitHub Action.</p>
 				<p>A slower-loading client-side RSS-parsing version is available at <a href="/live">/live</a> :)</p>
 				<p>Feel free to fork from <a href="https://github.com/sarajw/rss-joy-static">the GitHub repo</a>. Enjoy!</p>
-			</details>
+			</details>}
 			<p id="credit">2024 <a href="https://sarajoy.dev">Sara Joy</a></p>
 		</footer>
 	</body>
