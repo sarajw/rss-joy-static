@@ -1,0 +1,56 @@
+---
+import { rss2data, shuffle } from '../scripts/rss2data';
+import '../styles/rss-joy.css';
+
+const { feedURLs, edition  } = Astro.props;
+
+let rssCards = [];
+shuffle(feedURLs);
+for (const feedURL of feedURLs) {
+	rssCards.push(await rss2data(feedURL.url, feedURL.posts ?? undefined, feedURL.order ?? undefined));
+}
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="A page full of links to front-end dev and dev-adjacent bloggers, their RSS feeds and their most recent posts. The page refreshes at least 4 times a day. The blog cards are randomised each time.">
+		<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌈</text></svg>" />
+		<title>RSS JOY</title>
+	</head>
+	<body>
+		<header>
+			<h1>RS.S JOY.lol {edition && <em>{edition}</em>}</h1>
+			<p>An RSS-some starting page.</p>
+		</header>
+		<main>
+			{rssCards.map((rssCard) => (
+				<article style=`--hue: ${Math.round(Math.random() * 360)}`>
+					<h2><a href={rssCard.link} set:html={rssCard.title}></a></h2>
+					<a class="rss" href={rssCard.rssLink} aria-label="RSS feed"><svg width="1rem" height="1rem" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 64C0 46.3 14.3 32 32 32c229.8 0 416 186.2 416 416c0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96C14.3 96 0 81.7 0 64zM0 416a64 64 0 1 1 128 0A64 64 0 1 1 0 416zM32 160c159.1 0 288 128.9 288 288c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg></a>
+					<ul>
+					{rssCard.entries.map((entry: { link: string | URL; title: string; date: string }) => (
+						<li>
+							<a href={entry.link} set:html={entry.title}></a><small>{entry.date}</small>
+						</li>
+					))}
+					</ul>
+				</article>
+			))}
+		</main>
+		<footer>
+			<p class="dates-toggle"><label><input type="checkbox"> Show dates</label></p>
+			<details class="info">
+				<summary>About this site</summary>
+				<p>This little RSS aggregator is built with <a href="https://astro.build/">Astro</a>. It outputs a fast, static page.</p>
+				<p>It randomises the list of supplied <a href="/feeds.js">feed URLs</a> each time it rebuilds, as well as updating the entries. It uses <a href="https://www.npmjs.com/package/fast-xml-parser">fast-xml-parser</a>.</p>
+				<p>Rebuilds are triggered at least every 6 hours via a Netlify build hook and a GitHub Action.</p>
+				<p>A slower-loading client-side RSS-parsing version is available at <a href="/live">/live</a> :)</p>
+				<p>Feel free to fork from <a href="https://github.com/sarajw/rss-joy-static">the GitHub repo</a>. Enjoy!</p>
+			</details>
+			<p id="credit">2024 <a href="https://sarajoy.dev">Sara Joy</a></p>
+		</footer>
+	</body>
+</html>
