@@ -58,4 +58,5 @@ export const feedURLs = [
 	{ "url": "https://danielcwilson.com/feed.xml" },
 	{ "url": "https://tonsky.me/atom.xml" },
 	{ "url": "https://manuelmoreale.com/feed/rss" },
+	{ "url": "https://devtoolstips.org/feed.xml" },
 ];
