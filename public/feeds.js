@@ -57,6 +57,8 @@ export const feedURLs = [
 	{ "url": "https://sia.codes/feed/feed.xml", "order": "reverse", "posts": 4 },
 	{ "url": "https://danielcwilson.com/feed.xml" },
 	{ "url": "https://tonsky.me/atom.xml" },
+	{ "url": "https://manuelmoreale.com/feed/rss" },
+	{ "url": "https://devtoolstips.org/feed.xml" },
 	{ "url": "https://www.zachleat.com/web/feed/" },
 	{ "url": "https://frontendmasters.com/blog/feed/", "posts": 4 },
 ];
