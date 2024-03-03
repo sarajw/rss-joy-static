@@ -41,7 +41,7 @@ export async function rss2data(url, max = 5, order = "newFirst") {
 		const month = entryDate.getMonth();
 		const year = entryDate.getFullYear();
 		entries.push({
-			"title": posts[entry].title['#text'],
+			"title": posts[entry].title['#text'] != "" ? posts[entry].title['#text'] : "Untitled mystery post",
 			"link":  posts[entry].link['#text'] ?? posts[entry].link.attr_href ?? posts[entry].link[0].attr_href,
 			"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
 		});

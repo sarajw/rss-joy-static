@@ -41,7 +41,7 @@ async function rss2html(url, max, order) {
 		: posts.slice(-maxItems).toReversed();
 	
 	const items = entries.map((item) => ({
-			title: item.querySelector("title").textContent,
+			title: item.querySelector("title").textContent != '' ? item.querySelector("title").textContent : "Untitled mystery post",
 			link:
 				item.querySelector("link")?.textContent ||
 				item.querySelector("link")?.getAttribute("href"),
