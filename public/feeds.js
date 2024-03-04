@@ -61,4 +61,5 @@ export const feedURLs = [
 	{ "url": "https://devtoolstips.org/feed.xml" },
 	{ "url": "https://www.zachleat.com/web/feed/" },
 	{ "url": "https://frontendmasters.com/blog/feed/", "posts": 4 },
+{ "url": "https://ericportis.com/posts/feed/" },
 ];
