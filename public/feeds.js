@@ -61,6 +61,10 @@ export const feedURLs = [
 	{ "url": "https://devtoolstips.org/feed.xml" },
 	{ "url": "https://www.zachleat.com/web/feed/" },
 	{ "url": "https://frontendmasters.com/blog/feed/", "posts": 4 },
-{ "url": "https://ericportis.com/posts/feed/" },
-{ "url": "https://codersblock.com/rss.xml" },
+	{ "url": "https://ericportis.com/posts/feed/" },
+	{ "url": "https://codersblock.com/rss.xml" },
+	{ "url": "https://piccalil.li/feed.xml" },
+	{ "url": "https://evilmartians.com/chronicles.atom" },
+	{ "url": "https://lynnandtonic.com/feed.xml" },
+	{ "url": "https://geoffgraham.me/feed/" },
 ];
