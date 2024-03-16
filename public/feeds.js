@@ -67,4 +67,5 @@ export const feedURLs = [
 	{ "url": "https://evilmartians.com/chronicles.atom", "posts": 3 },
 	{ "url": "https://lynnandtonic.com/feed.xml" },
 	{ "url": "https://geoffgraham.me/feed/" },
+	{ "url": "https://ryantrimble.com/rss.xml", "order": "reverse" },
 ];
