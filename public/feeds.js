@@ -26,7 +26,7 @@ export const feedURLs = [
 	{ "url": "https://www.stefanjudis.com/rss.xml" },
 	{ "url": "https://ohhelloana.blog/feed.xml" },
 	{ "url": "https://shkspr.mobi/blog/feed/atom/", "posts": 4 },
-	{ "url": "https://thomasrigby.com/feed.xml", "order": "reverse", "posts": 4 },
+	{ "url": "https://thomasrigby.com/feed.xml",  "posts": 4 },
 	{ "url": "https://briefs.video/feed.xml", "order": "reverse" },
 	{ "url": "https://heydonworks.com/feed.xml", "order": "random" },
 	{ "url": "https://joshcollinsworth.com/api/rss.xml", "posts": 4 },
