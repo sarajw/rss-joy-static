@@ -64,7 +64,6 @@ export const feedURLs = [
 	{ "url": "https://ericportis.com/posts/feed/" },
 	{ "url": "https://codersblock.com/rss.xml" },
 	{ "url": "https://piccalil.li/feed.xml" },
-	{ "url": "https://evilmartians.com/chronicles.atom", "posts": 3 },
 	{ "url": "https://lynnandtonic.com/feed.xml" },
 	{ "url": "https://geoffgraham.me/feed/" },
 	{ "url": "https://ryantrimble.com/rss.xml", "order": "reverse" },
