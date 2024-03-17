@@ -11,6 +11,17 @@ async function rss2html(url, max, order) {
 		url = `/rewrite/${url.replace(/^https?\:\/\//i, "")}`;
 	}
 	const rssResponse = await fetch(url);
+	const rssOK = await rssResponse.ok;
+	if (!rssOK) {
+		return /*html*/ `<article style="--hue: ${Math.random() * 360}">
+		 <h2>Feed not found :(</h2>
+		 <ul>
+			 <li>
+			 <a href="${url}">${url}</a>
+			 </li>
+		 </ul>
+	 </article>`;
+	}
 	const rssText = await rssResponse.text();
 	const doc = parser.parseFromString(rssText, "application/xml");
 	window.rssDocs ??= {};
@@ -41,10 +52,16 @@ async function rss2html(url, max, order) {
 		: posts.slice(-maxItems).toReversed();
 	
 	const items = entries.map((item) => ({
-			title: item.querySelector("title").textContent != '' ? item.querySelector("title").textContent : "Untitled mystery post",
+			title: item.querySelector("title").textContent,
 			link:
 				item.querySelector("link")?.textContent ||
 				item.querySelector("link")?.getAttribute("href"),
+			date: new Date((isNotAtom ? item.querySelector("pubDate") : item.querySelector("published") ?? item.querySelector("updated")).textContent).toLocaleDateString('en-GB', {
+				weekday: "long",
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+			}),
 		}));
 	return /*html*/ `<article style="--hue: ${Math.random() * 360}">
 			<h2>${link ? /*html*/ `<a href="${link}">${title}</a>` : title}</h2>
@@ -53,7 +70,7 @@ async function rss2html(url, max, order) {
 			${items.map(
 				(item) => /*html*/ `
 				<li>
-					<a href="${item.link}">${item.title}</a>
+					<a href="${item.link}">${item.title || item.date}</a>
 				</li>
 				`
 			).join("")}

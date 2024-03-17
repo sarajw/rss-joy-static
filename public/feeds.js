@@ -48,7 +48,7 @@ export const feedURLs = [
 	{ "url": "https://fossheim.io/feed.xml", "posts": 3 },
 	{ "url": "https://hidde.blog/feed" },
 	{ "url": "https://www.scottohara.me/feed.xml", "posts": 4 },
-	// { "url": "https://sarajoy.dev/rss.xml" },
+	{ "url": "https://sarajoy.dev/rss.xml" },
 	{ "url": "https://heather-buchel.com/feed/feed.xml" },
 	{ "url": "https://darthmall.net/feed.xml" },
 	{ "url": "https://benmyers.dev/feed.xml" },

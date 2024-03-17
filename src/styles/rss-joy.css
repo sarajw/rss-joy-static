@@ -73,6 +73,7 @@ article li {
 }
 article li small { 
   color: hsl(var(--hue), 25%, 50%);
+  min-width: max-content;
 }
 @media (max-width: 400px) { 
   article li {

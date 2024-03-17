@@ -14,6 +14,10 @@ export function shuffle(array) {
 
 export async function rss2data(url, max = 5, order = "newFirst") {
 	const rssResponse = await fetch(url);
+	const rssOK = await rssResponse.ok;
+	if (!rssOK) return {
+		"rssOK": rssOK,
+	}
 	const rssText = await rssResponse.text();
 	const feed = parser.parse(rssText);
 	const isNotAtom = feed.rss ? true : false;
@@ -29,7 +33,6 @@ export async function rss2data(url, max = 5, order = "newFirst") {
 	let newestFirst = order == "newFirst";
 	if (order == "random") {
 		posts.sort(function(a, b){
-			// @ts-ignore
 			return new Date((isNotAtom ? b.pubDate : b.published ?? b.updated)['#text']) - new Date((isNotAtom ? a.pubDate : a.published ?? a.updated)['#text']);
 		});
 		newestFirst = true;
@@ -37,13 +40,16 @@ export async function rss2data(url, max = 5, order = "newFirst") {
 	let entries = [];
 	for (let entry = newestFirst ? 0 : posts.length - 1; newestFirst ? entry < max : entry >= (posts.length - max); newestFirst ? entry++ : entry--) {
 		const entryDate = new Date((isNotAtom ? posts[entry].pubDate : posts[entry].published ?? posts[entry].updated)['#text']);
-		const date = entryDate.getDate();
-		const month = entryDate.getMonth();
-		const year = entryDate.getFullYear();
+		const dateOptions = {
+			weekday: "long",
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		};
 		entries.push({
-			"title": posts[entry].title['#text'] != "" ? posts[entry].title['#text'] : "Untitled mystery post",
+			"title": posts[entry].title['#text'] != "" ? posts[entry].title['#text'] : entryDate.toLocaleDateString('en-GB', dateOptions),
 			"link":  posts[entry].link['#text'] ?? posts[entry].link.attr_href ?? posts[entry].link[0].attr_href,
-			"date": `${year} ${(month + 1).toString().padStart(2, '0')} ${date.toString().padStart(2, '0')}`,
+			"date": entryDate.toISOString().slice(0, 10),
 		});
 	}
 	return {
@@ -51,5 +57,6 @@ export async function rss2data(url, max = 5, order = "newFirst") {
 		"link": link,
 		"rssLink": url,
 		"entries": entries,
+		"rssOK": rssOK,
 	}
 }
