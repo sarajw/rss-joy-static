@@ -26,9 +26,9 @@ export const feedURLs = [
 	{ "url": "https://www.stefanjudis.com/rss.xml" },
 	{ "url": "https://ohhelloana.blog/feed.xml" },
 	{ "url": "https://shkspr.mobi/blog/feed/atom/", "posts": 4 },
-	{ "url": "https://thomasrigby.com/feed.xml",  "posts": 4 },
+	{ "url": "https://thomasrigby.com/feed.xml" },
 	{ "url": "https://briefs.video/feed.xml", "order": "reverse" },
-	{ "url": "https://heydonworks.com/feed.xml", "order": "random" },
+	{ "url": "https://heydonworks.com/feed.xml" },
 	{ "url": "https://joshcollinsworth.com/api/rss.xml", "posts": 4 },
 	{ "url": "https://knowler.dev/feed.xml" },
 	{ "url": "https://feeds.feedburner.com/brad-frosts-blog" },
@@ -67,4 +67,5 @@ export const feedURLs = [
 	{ "url": "https://lynnandtonic.com/feed.xml" },
 	{ "url": "https://geoffgraham.me/feed/" },
 	{ "url": "https://ryantrimble.com/rss.xml", "order": "reverse" },
+	{ "url": "https://blog.codepen.io/feed/" },
 ];
