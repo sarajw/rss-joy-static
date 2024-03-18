@@ -46,7 +46,7 @@ export const feedURLs = [
 	{ "url": "https://weblog.anniegreens.lol/rss.xml" },
 	{ "url": "https://mikegrindle.com/feed.xml" },
 	{ "url": "https://fossheim.io/feed.xml", "posts": 3 },
-	{ "url": "https://hidde.blog/feed" },
+	{ "url": "https://hidde.blog/feed", "order": "reverse" },
 	{ "url": "https://www.scottohara.me/feed.xml", "posts": 4 },
 	{ "url": "https://sarajoy.dev/rss.xml" },
 	{ "url": "https://heather-buchel.com/feed/feed.xml" },
