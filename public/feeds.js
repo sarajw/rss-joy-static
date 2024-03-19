@@ -68,4 +68,5 @@ export const feedURLs = [
 	{ "url": "https://geoffgraham.me/feed/" },
 	{ "url": "https://ryantrimble.com/rss.xml", "order": "reverse" },
 	{ "url": "https://blog.codepen.io/feed/" },
+	{ "url": "https://dbushell.com/rss.xml" },
 ];
