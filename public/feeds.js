@@ -70,4 +70,5 @@ export const feedURLs = [
 	{ "url": "https://blog.codepen.io/feed/" },
 	{ "url": "https://dbushell.com/rss.xml" },
 	{ "url": "https://jakelazaroff.com/rss.xml" },
+	{ "url": "https://ethanmarcotte.com/wrote/feed.xml" },
 ];
