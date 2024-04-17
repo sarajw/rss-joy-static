@@ -72,4 +72,5 @@ export const feedURLs = [
 	{ "url": "https://jakelazaroff.com/rss.xml" },
 	{ "url": "https://ethanmarcotte.com/wrote/feed.xml" },
 	{ "url": "https://darn.es/rss.xml" },
+	{ "url": "https://cssence.com/all/rss.xml" },
 ];
