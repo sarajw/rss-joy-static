@@ -46,6 +46,8 @@ export async function rss2data(url, max = 5, order = "newFirst") {
 			month: "long",
 			day: "numeric",
 		};
+		const entryLink = posts[entry].link['#text'] ?? posts[entry].link.attr_href ?? posts[entry].link[0].attr_href;
+		if (!entryLink.startsWith('http')) entryLink = `${link}${entryLink}`;
 		entries.push({
 			"title": posts[entry].title['#text'] != "" ? posts[entry].title['#text'] : entryDate.toLocaleDateString('en-GB', dateOptions),
 			"link":  posts[entry].link['#text'] ?? posts[entry].link.attr_href ?? posts[entry].link[0].attr_href,
