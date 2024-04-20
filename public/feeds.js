@@ -16,7 +16,7 @@ export const feedURLs = [
 	{ "url": "https://saneef.com/feed.xml" },
 	{ "url": "https://dutchcelt.nl/feed.xml", "order": "reverse" },
 	{ "url": "https://kilianvalkhof.com/feed/" },
-	{ "url": "https://robinrendle.com/cascadefeed.xml" },
+	{ "url": "https://www.csscade.com/feed.rss" },
 	{ "url": "https://robinrendle.com/feed.xml" },
 	{ "url": "https://gkeenan.co/avgb?format=rss", "posts": 3 },
 	{ "url": "https://lea.codes/rss.xml"},
