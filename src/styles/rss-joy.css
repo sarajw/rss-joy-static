@@ -96,6 +96,7 @@ article a {
   color: color-mix( in srgb, hsl(var(--hue), 100%, 50%) 40%, CanvasText);
   text-underline-offset: 0.15em;
   text-decoration-thickness: 0.05em;
+  overflow-wrap: anywhere;
 }
 article a:visited {
   color: color-mix( in srgb, hsl(var(--hue), 25%, 50%) 30%, CanvasText);
