@@ -22,7 +22,7 @@ export const feedURLs = [
 	{ "url": "https://lea.codes/rss.xml"},
 	{ "url": "https://helloyes.dev/feeds/blog/feed.xml" },
 	{ "url": "https://www.sarasoueidan.com/blog/index.xml", "posts": 4 },
-//	{ "url": "https://joanwestenberg.com/blog?format=rss", "posts": 4 },
+	{ "url": "https://www.joanwestenberg.com/blog?format=rss", "posts": 4 },
 	{ "url": "https://www.stefanjudis.com/rss.xml" },
 	{ "url": "https://ohhelloana.blog/feed.xml" },
 	{ "url": "https://shkspr.mobi/blog/feed/atom/", "posts": 4 },
