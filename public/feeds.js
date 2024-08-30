@@ -74,5 +74,6 @@ export const feedURLs = [
 	{ "url": "https://darn.es/rss.xml" },
 	{ "url": "https://cssence.com/all/rss.xml" },
 	{ "url": "https://adactio.com/rss/" },
- { "url": "https://css-tricks.com/feed/" },
+	{ "url": "https://css-tricks.com/feed/" },
+	{ "url": "https://newsletter.danhon.com/rss" },
 ];
