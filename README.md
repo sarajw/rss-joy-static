@@ -1,4 +1,4 @@
-## Repository for RSS JOY
+## Repository for RSS JOY!
 
 See the site in action at https://rs.sjoy.lol :)
 
