@@ -13,7 +13,9 @@ export function shuffle(array) {
 }
 
 export async function rss2data(url, max = 5, order = "newFirst") {
+  // console.time("fetch: " + url);
   const rssResponse = await fetch(url);
+  // console.timeEnd("fetch: " + url);
   if (!rssResponse)
     return {
       rssResponse: rssResponse,
